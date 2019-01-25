@@ -1,0 +1,18 @@
+DELIMITER $$
+CREATE PROCEDURE booking_engine()
+BEGIN
+	DECLARE u_id INTEGER DEFAULT 0;
+	DEClARE booking_cursor CURSOR FOR 
+    SELECT user_id FROM user  WHERE prime_customer = 1;
+ 
+ OPEN booking_cursor;
+ 
+ do_booking: LOOP
+ 
+ FETCH booking_cursor INTO u_id;
+ UPDATE booking SET booking_stats_id=2 WHERE user_id=u_id;
+  END LOOP do_booking;
+ 
+ CLOSE booking_cursor;
+END$$
+DELIMITER ;
